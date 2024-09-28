@@ -15,8 +15,10 @@ RUN   apt-get update \
     && apt-get install -y libsdl2-dev \
     && apt-get install -y libwxgtk3.0-gtk3-dev \
     && apt-get install -y libgtk2.0-dev \
-    && apt-get install -y zlib1g-dev
+    && apt-get install -y zlib1g-dev \
+    && apt-get install -y gdb
 RUN useradd -ms /bin/bash dickers
 RUN echo 'dickers:dickers' | chpasswd && adduser dickers sudo
 USER dickers
 WORKDIR /home/dickers
+RUN export PATH="${HOME}/pintos/src/utils:$PATH"
