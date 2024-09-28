@@ -80,9 +80,9 @@ char* bx_dbg_disasm_symbolic_address(Bit32u eip, Bit32u base)
    to disable the template code:  just set BX_HAVE_HASH_MAP=0
    in config.h */
 #if BX_HAVE_HASH_MAP
-#include <hash_map>
+#include <unordered_map>
 #elif BX_HAVE_HASH_MAP_H
-#include <hash_map.h>
+#include <unordered_map.h>
 #endif
 
 #if BX_HAVE_SET
@@ -132,7 +132,7 @@ struct context_t
   const set<symbol_entry_t*,lt_symbol_entry_t>* get_all_symbols() const {return syms;}
   const set<symbol_entry_t*,lt_rsymbol_entry_t>* get_all_rsymbols() const {return rsyms;}
 private:
-  static hash_map<int,context_t*>* map;
+  static unordered_map<int,context_t*>* map;
   // Forvard references (find name by address)
   set<symbol_entry_t*,lt_symbol_entry_t>* syms;
   // Reverse references (find address by name)
@@ -140,7 +140,7 @@ private:
   Bit32u id;
 };
 
-hash_map<int,context_t*>* context_t::map = new hash_map<int,context_t*>;
+unordered_map<int,context_t*>* context_t::map = new unordered_map<int,context_t*>;
 
 context_t::context_t (Bit32u _id)
 {
