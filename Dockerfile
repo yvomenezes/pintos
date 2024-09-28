@@ -7,4 +7,6 @@ RUN   apt-get update \
     && apt-get install -y qemu-system \
     && apt-get install -y sudo
 RUN useradd -ms /bin/bash dickers
+RUN echo 'dickers:dickers' | chpasswd
 USER dickers
+WORKDIR /home/dickers
